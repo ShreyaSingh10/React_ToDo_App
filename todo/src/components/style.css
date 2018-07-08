@@ -1,0 +1,14 @@
+.container{
+	background: pink;
+	margin: 20px;
+	padding: 20px;
+	width: 500px;
+	height:500px
+}
+
+.todos{
+	background: black;
+	margin: 50px;
+	color: white;
+}
+
