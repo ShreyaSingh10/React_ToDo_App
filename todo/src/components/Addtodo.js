@@ -23,7 +23,7 @@ class Addtodo extends React.Component{
 	handleSubmit = e =>{
 		e.preventDefault();
 		const todo ={
-			name:''
+			name: this.state.name
 		}
 		this.props.addToDo(todo);
 

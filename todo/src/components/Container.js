@@ -8,12 +8,19 @@ class Container extends React.Component{
 		tasks:[
 			{ name: "I am task 1"},
 			{ name: "I am task 2"},
-			{ name: "I am task 3"},
 		]
 	}
 
-	addToDo = () => {
+	addToDo = (todo) => {
 		console.log("Adding TODO");
+		this.setState((prevstate) => {
+			let a= prevstate.tasks;
+			a.push(todo);
+			this.setState({
+				tasks:a,
+			});
+			console.log(this.state.tasks);
+		})
 
 	}
 	
