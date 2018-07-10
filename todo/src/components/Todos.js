@@ -6,6 +6,7 @@ class Todos extends React.Component{
 		return(
 			<div className="todos">
 					{this.props.name}
+					<button id="cancel" onClick={this.props.deleteToDo} >delete</button>
 			</div>
 		);
 	}

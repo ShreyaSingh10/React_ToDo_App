@@ -23,13 +23,17 @@ class Container extends React.Component{
 		})
 
 	}
+
+    deleteToDo = () => {
+    	console.log("deleting TODO");
+    }
 	
 	render(){
 		return(
 			<div className="container">
 			    To Do App
 
-			    {this.state.tasks.map((task)=><Todos name={task.name}/>)}
+			    {this.state.tasks.map((task)=><Todos name={task.name} deleteToDo={this.deleteToDo}/>)}
 				<Addtodo addToDo={this.addToDo}/>
 			</div>
 		);
