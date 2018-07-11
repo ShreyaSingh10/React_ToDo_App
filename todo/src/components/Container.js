@@ -23,10 +23,21 @@ class Container extends React.Component{
 		})
 
 	}
-
-    deleteToDo = () => {
-    	console.log("deleting TODO");
-    	console.log("Trial");
+//All logigs to delete todo will be here
+    deleteToDo = (identifier) => {
+    	console.log(identifier)
+    	this.setState((prevstate) => {
+    		console.log("coming here")
+    		console.log(prevstate.tasks);
+    		let newTasks = prevstate.tasks.filter((t) => {
+    			console.log(t.name)
+    			return t.name !== identifier
+    		})
+    		this.setState({
+    			tasks: newTasks
+    		})
+    		console.log(newTasks);
+    	})
     }
 	
 	render(){
