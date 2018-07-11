@@ -26,6 +26,7 @@ class Container extends React.Component{
 
     deleteToDo = () => {
     	console.log("deleting TODO");
+    	console.log("Trial");
     }
 	
 	render(){
