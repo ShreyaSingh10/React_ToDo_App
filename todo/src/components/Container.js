@@ -2,11 +2,12 @@ import React from 'react';
 import Todos from './Todos.js'
 import Addtodo from './Addtodo.js'
 import './style.css'
+import axios from 'axios'
 
 class Container extends React.Component{
 	state={
 		tasks:[
-				{
+				/*{
 				"visible": true,
 				"completed": false,
 				"date": "2018-07-12T15:13:56.387Z",
@@ -29,8 +30,12 @@ class Container extends React.Component{
 				"_id": "5b42050940b4106807a0afe5",
 				"name": "Pastry",
 				"description": "Eat pastry ar 6"
-				}
+				}*/
 			]
+	}
+	componentDidMount(){
+		axios.get('http://api.todo.apathak.com/api/todo')
+		.then(response => this.setState({tasks:response.data}))
 	}
 
 	addToDo = (todo) => {
@@ -64,11 +69,13 @@ class Container extends React.Component{
     
 	
 	render(){
+		console.log(this.state);
 		return(
 			<div className="container">
 			    To Do App
 
 			    {this.state.tasks.map((task)=><Todos
+			    	key={task._id}
 			    	name={task.name}
 			    	deleteToDo={this.deleteToDo} 
 			    	completeToDo={this.completeToDo} />)
