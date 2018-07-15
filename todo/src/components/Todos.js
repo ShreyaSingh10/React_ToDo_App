@@ -7,13 +7,13 @@ class Todos extends React.Component{
 	//Basicaly it will call it ,  
 	
     handleDelete = e => {
-    	this.props.deleteToDo(e.target.name);
+    	this.props.deleteToDo(e.target.id);
     }
 
     //You have not defined any name property on the div
 
 	handleComplete = e =>{
-		console.log("hi",e.target.name)
+		//console.log("hi",e.target.name)
 		this.props.completeToDo(e.target.name)
 	}
 
@@ -21,7 +21,7 @@ class Todos extends React.Component{
 		return(
 			<div className="todos" >
 					{this.props.name}
-					<button id="cancel" name={this.props.name} onClick={this.handleDelete} >delete</button>
+					<button className="cancel" name={this.props.name} id={this.props.id} onClick={this.handleDelete} >delete</button>
 			</div>
 		);
 	}

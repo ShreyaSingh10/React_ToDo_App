@@ -38,6 +38,12 @@ class Container extends React.Component{
 		.then(response => this.setState({tasks:response.data}))
 	}
 
+// {
+// 	name:"",
+// 	description:""
+// }
+
+
 	addToDo = (todo) => {
 		console.log("Adding TODO");
 		this.setState((prevstate) => {
@@ -48,23 +54,37 @@ class Container extends React.Component{
 			});
 			console.log(this.state.tasks);
 		})
-	}
+		axios.post('http://api.todo.apathak.com/api/todo', {
+		    name: todo.name,
+		    description: ''
+		  })
+		  //.then(function (response) {
+		   // console.log('response',response);
+		  //})
+		}
 
 
 //All logigs to delete todo will be here
     deleteToDo = (identifier) => {
-    	//console.log(identifier)
+    	console.log("identifier",identifier);
     	this.setState((prevstate) => {
     		//console.log("coming here")
     		//console.log(prevstate.tasks);
     		let newTasks = prevstate.tasks.filter((t) => {
     			//console.log(t.name)
-    			return t.name !== identifier
+    			return t._id !== identifier
     		})
+
+
     		this.setState({
     			tasks: newTasks
     		})
     	})
+    	axios.delete('http://api.todo.apathak.com/api/todo', {
+			id:identifier
+		}).then(function (response) {
+		    console.log('response',response);
+		  })
     }
     
 	
@@ -76,6 +96,7 @@ class Container extends React.Component{
 
 			    {this.state.tasks.map((task)=><Todos
 			    	key={task._id}
+			    	id={task._id}
 			    	name={task.name}
 			    	deleteToDo={this.deleteToDo} 
 			    	completeToDo={this.completeToDo} />)
