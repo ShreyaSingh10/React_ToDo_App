@@ -80,9 +80,8 @@ class Container extends React.Component{
     			tasks: newTasks
     		})
     	})
-    	axios.delete('http://api.todo.apathak.com/api/todo', {
-			id:identifier
-		}).then(function (response) {
+
+    	axios.delete('http://api.todo.apathak.com/api/todo', {data:{id:identifier}}).then(function (response) {
 		    console.log('response',response);
 		  })
     }
@@ -92,7 +91,9 @@ class Container extends React.Component{
 		console.log(this.state);
 		return(
 			<div className="container">
-			    To Do App
+			    
+			    <h1>To Do App</h1>
+			    <Addtodo addToDo={this.addToDo}/>
 
 			    {this.state.tasks.map((task)=><Todos
 			    	key={task._id}
@@ -101,8 +102,8 @@ class Container extends React.Component{
 			    	deleteToDo={this.deleteToDo} 
 			    	completeToDo={this.completeToDo} />)
 			    }
-				<Addtodo addToDo={this.addToDo}/>
 			</div>
+			
 		);
 	}
 }
