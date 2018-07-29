@@ -6,75 +6,57 @@ import axios from 'axios'
 
 class Container extends React.Component{
 	state={
-		tasks:[
-
-			]
+		tasks:[]
 	}
-
 
 	componentDidMount(){
-		axios.get('http://api.todo.apathak.com/api/todo')
-		.then(response => this.setState({tasks:response.data}))
-	}
-
-
-	addToDo = (todo) => {
-		console.log("Adding TODO");
-		this.setState((prevstate) => {
-			let a= prevstate.tasks;
-			a.push(todo);
-			this.setState({
-				tasks:a,
-			});
-			console.log(this.state.tasks);
-		})
-		axios.post('http://api.todo.apathak.com/api/todo', {
-		    name: todo.name,
-		    description: '',
-		  }).then(()=>{
-		  	axios.get('http://api.todo.apathak.com/api/todo').then((response)=>{
-			this.setState(() => ({
-							tasks:response.data,
-							
-						}),()=>{
-				console.log("response",response.data,this.state);
-			})
-			
-			})
-		  })
+			axios.get('http://api.todo.apathak.com/api/todo')
+			.then(response => this.setState({tasks:response.data}))
 		}
 
-    deleteToDo = (identifier) => {
-    	console.log("identifier",identifier);
-    	this.setState((prevstate) => {
+	addToDo = (todo) => {
+			this.setState((prevstate) => {
+				let a= prevstate.tasks;
+				a.push(todo);
+				return {
+					tasks:a,
+				}
+			})
+			axios.post('http://api.todo.apathak.com/api/todo', {
+			    name: todo.name,
+			    description: '',
+			  }).then(()=>{
+			  	axios.get('http://api.todo.apathak.com/api/todo').then((response)=>{
+						this.setState({
+								tasks:response.data,
+						})
+					})
+			  })
+			}
 
-    		let newTasks = prevstate.tasks.filter((t) => {
+    deleteToDo = (identifier) => {
+    	this.setState((prevstate) => {
+				let newTasks = prevstate.tasks.filter((t) => {
     			return t._id !== identifier
     		})
-
-    		this.setState({
+				return{
     			tasks: newTasks,
-    		})
+    		}
     	})
-
-    	axios.delete('http://api.todo.apathak.com/api/todo', {data:{id:identifier}}).then(function (response) {
-		    console.log('response',response);
+    	axios.delete('http://api.todo.apathak.com/api/todo', {data:{id:identifier}}).then((response) => {
+		    console.log('Deleted Successfully ! ');
 		  })
-
     }
-    
+
     editToDo = (value, place) => {
     	const tempState = this.state;
     	const tempTask = this.state.tasks[place];
     	tempTask.name =value;
-
     	tempState.tasks[place] = tempTask;
     	this.setState(tempState);
 
     }
-	
-	render(){
-		console.log(this.state)
+		render(){
 		return(
 			<div className="parent_container">
 				<div className="container">
@@ -85,14 +67,14 @@ class Container extends React.Component{
 				    	key={task._id}
 				    	id={task._id}
 				    	name={task.name}
-				    	deleteToDo={this.deleteToDo} 
+				    	deleteToDo={this.deleteToDo}
 				    	editToDo={this.editToDo}
 				    	place={place}
 				    	/>)
 				    }
 				</div>l
 			</div>
-			
+
 		);
 	}
 }

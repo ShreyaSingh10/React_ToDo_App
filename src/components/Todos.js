@@ -4,35 +4,34 @@ import './style.css'
 class Todos extends React.Component{
 	state={
 		name:"",
-	}  
-	
-    handleDelete = e => {
-    	this.props.deleteToDo(e.target.id);
-    }
+	}
 
     handleChange = e => {
-    	console.log(e.target.value);
-    	const {value} = e.target;
-    	this.setState(()=>({
-    		name:value,
-    	}))
+    	const name = e.target.value;
+    	this.setState({
+    		name
+    	})
     }
 
-    submitChange = ()=>{
-    	this.props.editToDo(this.state.name, this.props.place);	
-    }
-    
     componentDidMount(){
-		this.setState({
-			name: this.props.name,
-		})
-	} 
+			this.setState({
+				name: this.props.name,
+			})
+	}
 
 	render(){
+		const { name } = this.state
+		const { place,id } = this.props;
+		const { editToDo, deleteToDo } = this.props;
 		return(
 			<div className="todos" >
-					<input type="text" value={this.state.name} onChange={this.handleChange} onBlur={this.submitChange}></input>
-					<button className="cancel" id={this.props.id} onClick={this.handleDelete} >delete</button>
+					<input
+						type="text"
+						value={name}
+						onChange={this.handleChange}
+						onBlur={ () => editToDo(name, place)}
+					/>
+					<button className="cancel" onClick={() => deleteToDo(id)} >X</button>
 			</div>
 		);
 	}

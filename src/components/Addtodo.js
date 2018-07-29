@@ -5,19 +5,12 @@ class Addtodo extends React.Component{
 	state={
 		name:''
 	}
+
 	handleChange = e =>{
-			console.log(e.target.value)
-
 			const  name  = e.target.value;
-			
-			this.setState(()=>{
-				return{
+			this.setState({
 					name
-				}
-			})
-
-			console.log(this.state);
-
+				})
 	}
 
 	handleSubmit = e =>{
@@ -25,12 +18,8 @@ class Addtodo extends React.Component{
 		const todo ={
 			name: this.state.name,
 			visible:true,
-			completed:false,
-
 		}
 		this.props.addToDo(todo);
-
-
 	}
 
 
