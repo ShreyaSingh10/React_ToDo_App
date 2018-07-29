@@ -23,7 +23,10 @@ class Addtodo extends React.Component{
 	handleSubmit = e =>{
 		e.preventDefault();
 		const todo ={
-			name: this.state.name
+			name: this.state.name,
+			visible:true,
+			completed:false,
+
 		}
 		this.props.addToDo(todo);
 
