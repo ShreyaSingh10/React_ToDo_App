@@ -25,7 +25,7 @@ class Todos extends React.Component{
 		const { editToDo, deleteToDo } = this.props;
 		return(
 			<div className="todos" >
-					<input
+					<input 
 						type="text"
 						value={name}
 						onChange={this.handleChange}

@@ -59,20 +59,24 @@ class Container extends React.Component{
 		render(){
 		return(
 			<div className="parent_container">
-				<div className="container">
-				    <h1>To Do App</h1>
-				    <Addtodo addToDo={this.addToDo}/>
-
-				    {this.state.tasks.map((task,place)=> task.visible && <Todos
-				    	key={task._id}
-				    	id={task._id}
-				    	name={task.name}
-				    	deleteToDo={this.deleteToDo}
-				    	editToDo={this.editToDo}
-				    	place={place}
-				    	/>)
-				    }
-				</div>l
+			    <h1><font face = "Comic sans MS" size ="7">Todo List</font></h1>
+			    <Addtodo addToDo={this.addToDo}/>
+			    <div className="container">
+		    		<h2><font face = "Comic sans MS" size ="5">Todos </font></h2>
+		    		<div className="ancestor">
+			    		<div className="todos-container">
+						    {this.state.tasks.map((task,place)=> task.visible && <Todos
+						    	key={task._id}
+						    	id={task._id}
+						    	name={task.name}
+						    	deleteToDo={this.deleteToDo}
+						    	editToDo={this.editToDo}
+						    	place={place}
+						    	/>)
+						    }
+				    	</div>
+			    	</div>
+				</div>
 			</div>
 
 		);
